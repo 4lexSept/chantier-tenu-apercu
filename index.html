@@ -2160,7 +2160,8 @@ main .step-h h2{line-height:1.05}
 @media (max-width:860px){.h8-photo{height:auto;aspect-ratio:16/5}}
 /* A-V9 et B-D7 en-tête au téléphone : le dessin punaisé ne reste pas seul en bas */
 @media (max-width:720px){.page-head .ph-ill{display:none}}
-@media (max-width:900px) and (min-width:721px){.page-head .ph-ill{margin-inline:auto;transform:none}}
+/* passe 2, point 7 : de 721 à 900 px, le dessin d'en-tête se range à droite du titre (avant : centré sous le texte) */
+@media (max-width:900px) and (min-width:721px){.ph-grid{grid-template-columns:minmax(0,1fr) 200px;gap:16px 32px;align-items:start}.page-head .ph-ill{width:100%;max-width:200px;margin:8px 0 0}.page-head .ph-ill figcaption{display:none}}
 /* A-V10 la feuille « Votre chiffrage » ne prend pas toute la tablette */
 @media (min-width:601px) and (max-width:900px){
   .s10-panel{left:50%;right:auto;width:min(560px,100%);transform:translate(-50%,105%)}
@@ -2427,6 +2428,43 @@ main .page-head+section.block{padding-top:clamp(28px,3.5vw,44px)!important}
 #p-range{height:44px}
 /* C-D22 transparence au téléphone : icône plus petite, texte plus large */
 @media (max-width:560px){.tsec{grid-template-columns:40px minmax(0,1fr);gap:12px}.tsec .dd-ic{width:40px;height:40px}}
+
+/* ======================================================================
+   Passe 2 (20/10) : retours du relecteur, audit/CORRECTIONS.md, section « Passe 2 »
+   ====================================================================== */
+/* P2-1 et P2-5 accueil au téléphone : le dessin du salon est masqué, comme les dessins d'en-tête des autres pages (A-V9) ;
+   le bouton « Simuler mes travaux » de la carte tient au premier écran, même sur 700 px de haut */
+@media (max-width:600px){.h8-photo{display:none}}
+/* P2-1 la barre du bas attend que le bouton de la carte de l'accueil sorte de l'écran */
+.mobilebar{transition:transform .25s ease,visibility .25s}
+html.cta-vu .mobilebar{transform:translateY(calc(100% + 12px));visibility:hidden}
+/* P2-2 simulateur au téléphone : les trois niveaux sur une rangée, la description reste lue par les lecteurs d'écran */
+@media (max-width:600px){
+  .lv-grid10{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+  .lv10{position:relative;min-height:52px;padding:8px 4px;align-items:center;text-align:center}
+  .lv10 b{font-size:15px;letter-spacing:-.01em}
+  .lv10 span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .s10-top>[role="group"]{order:-1}
+}
+/* P2-3 page Prix : deux colonnes équilibrées (le JS range chaque corps de métier dans la colonne qui équilibre les hauteurs) */
+#prix-postes.cols2{display:grid;columns:auto;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:start}
+#prix-postes .pc-col{display:grid;gap:16px;min-width:0}
+#prix-postes .pc-col>.pc9{margin:0}
+/* P2-6 pied de page au téléphone : grille régulière, France Rénov' sur toute la largeur et l'adresse dessous */
+@media (max-width:720px){
+  .foot-map{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 16px;align-items:start}
+  .foot-map>div:nth-child(-n+3){grid-column:1}
+  .foot-map>div:nth-child(4){grid-column:2;grid-row:1 / span 3}
+  .foot-band{flex-direction:column;align-items:stretch}
+  .foot-band>a:first-child{display:block;width:100%;padding-block:10px}
+  .foot-band>a:first-child .nobr{display:block;margin-top:6px}
+}
+/* P2-7 accueil de 601 à 860 px : 24 px entre le dessin du salon et la carte « Votre logement » */
+@media (min-width:601px) and (max-width:860px){.hero8{row-gap:24px}}
+/* P2-9 menu du téléphone : le panneau descend jusqu'au bas de l'écran, les deux boutons en bas */
+@media (max-width:1099px){.nav.open .nav-cta{margin-top:auto;padding-top:16px}}
+/* P2-10 formulaire de rappel : l'encadré « Maquette », la règle des imprévus et la mention des données à la largeur de la carte */
+.s10-after>*,.s10-after .warnbox,#f-estimer .dnote{max-width:none;justify-self:stretch;width:auto}
 </style>
 
 <svg class="defs" width="0" height="0" aria-hidden="true" focusable="false"><defs>
@@ -2475,7 +2513,7 @@ main .page-head+section.block{padding-top:clamp(28px,3.5vw,44px)!important}
 </nav>
 <div class="head-cta">
 <a class="btn ghost hc-call" href="#contact">Être rappelé</a>
-<a class="btn hc-est" href="#estimer"><span class="l-long">Simuler mes travaux</span><span class="l-short">Simulateur</span></a>
+<a class="btn hc-est" href="#estimer"><span class="l-long">Simuler mes travaux</span><span class="l-short">Simuler mes travaux</span></a>
 <button class="burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav">
 <svg class="i-open" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg><svg class="i-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
 </button>
@@ -2492,7 +2530,7 @@ main .page-head+section.block{padding-top:clamp(28px,3.5vw,44px)!important}
 <div class="wrap hero8">
 <div class="h8-txt">
 <h1 class="disp h1 hero-h1">Votre rénovation à Lille, chiffrée avant tout appel</h1>
-<p class="h8-price"><b class="num" id="h-m2">650 à 1 000 €</b> <span>le m², rénovation complète</span> <span class="tag-ex">exemple, 68 m²</span></p>
+<p class="h8-price"><b class="num" id="h-m2">670 à 1 020 €</b> <span>le m², rénovation complète</span> <span class="tag-ex">exemple, 68 m²</span></p>
 <figure class="h8-photo" aria-hidden="true"><svg viewBox="0 0 360 150" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false"><rect width="360" height="150" fill="#EFE6D8"/><rect y="112" width="360" height="38" fill="#C99A6B"/><g stroke="#B5875A" stroke-width="2"><path d="M0 126h360M0 140h360M70 112v14M160 126v14M250 112v14M110 140v10M300 140v10"/></g><rect x="206" y="14" width="74" height="86" rx="37" fill="#DCE3F7"/><path d="M243 14v86M206 58h74" stroke="#FBFAF7" stroke-width="5"/><rect class="sofa" x="34" y="78" width="128" height="36" rx="16" fill="#2340B8"/><rect x="42" y="64" width="112" height="26" rx="13" fill="#3A55C9"/><rect x="44" y="112" width="7" height="8" fill="#151E24"/><rect x="144" y="112" width="7" height="8" fill="#151E24"/><circle cx="100" cy="34" r="13" fill="#F2C46B"/><path d="M100 0v21" stroke="#151E24" stroke-width="2"/><path d="M318 112c0-24 5-34 10-41M318 112c-2-22-10-29-17-32M318 112c3-17 14-22 21-24" stroke="#2A7A4B" stroke-width="4" fill="none" stroke-linecap="round"/><rect x="306" y="98" width="24" height="16" rx="6" fill="#A8462B"/></svg></figure>
 </div>
 <form class="h8-card" id="teaser" aria-label="Simulateur de travaux, première question" novalidate>
@@ -2628,19 +2666,19 @@ main .page-head+section.block{padding-top:clamp(28px,3.5vw,44px)!important}
 <article id="travaux-appartement" class="card trow" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:20px 40px">
 <figure class="sheet anim" data-lit aria-hidden="true"><svg class="ill" viewBox="0 0 320 160"  aria-hidden="true" focusable="false"><rect class="rm" style="--d:0" x="30" y="22" width="130" height="120"/><rect class="rm" style="--d:140" x="160" y="22" width="65" height="63"/><rect class="rm" style="--d:280" x="225" y="22" width="65" height="63"/><rect class="rm" style="--d:420" x="245" y="85" width="45" height="57"/><rect class="rm" style="--d:560" x="160" y="85" width="85" height="57"/><path class="w ds" d="M30 22H290V142H30Z"/><rect class="win df" x="50" y="19" width="40" height="6"/><path class="s2 df" d="M50 22H90"/><rect class="win df" x="110" y="19" width="35" height="6"/><path class="s2 df" d="M110 22H145"/><rect class="win df" x="178" y="19" width="32" height="6"/><path class="s2 df" d="M178 22H210"/><rect class="win df" x="245" y="19" width="30" height="6"/><path class="s2 df" d="M245 22H275"/><rect class="win df" x="60" y="139" width="45" height="6"/><path class="s2 df" d="M60 142H105"/><rect class="win df" x="27" y="60" width="6" height="40"/><path class="s2 df" d="M30 60V100"/><rect class="gap" x="190" y="139" width="18" height="6"/><path class="p ds" d="M160 22V95M160 125V142M160 85H170M188 85H227M243 85H290M225 22V85M245 85V100M245 116V142"/><path class="s ds" d="M170 85V67A18 18 0 0 1 188 85M243 85V69A16 16 0 0 0 227 85M245 100H261A16 16 0 0 1 245 116M190 142V124A18 18 0 0 1 208 142"/><rect class="s ds" x="40" y="30" width="55" height="16" rx="2"/><path class="s ds" d="M40 34H95M58 34V46M76 34V46"/><circle class="s ds" cx="118" cy="62" r="11"/><circle class="s ds" cx="118" cy="46" r="3"/><circle class="s ds" cx="118" cy="78" r="3"/><circle class="s ds" cx="102" cy="62" r="3"/><circle class="s ds" cx="134" cy="62" r="3"/><rect class="s ds" x="34" y="118" width="70" height="20"/><rect class="s ds" x="42" y="122" width="18" height="12" rx="2"/><circle class="s ds" cx="80" cy="124" r="3"/><circle class="s ds" cx="92" cy="124" r="3"/><circle class="s ds" cx="80" cy="132" r="3"/><circle class="s ds" cx="92" cy="132" r="3"/><rect class="s ds" x="172" y="28" width="40" height="30" rx="1"/><path class="s ds" d="M172 40H212"/><rect class="s ds" x="175" y="31" width="15" height="6" rx="1"/><rect class="s ds" x="194" y="31" width="15" height="6" rx="1"/><rect class="s ds" x="238" y="28" width="40" height="30" rx="1"/><path class="s ds" d="M238 40H278"/><rect class="s ds" x="241" y="31" width="15" height="6" rx="1"/><rect class="s ds" x="260" y="31" width="15" height="6" rx="1"/><rect class="s ds" x="250" y="90" width="36" height="18" rx="2"/><rect class="s ds" x="253" y="93" width="30" height="12" rx="5"/><circle class="s ds" cx="279" cy="132" r="5"/><text x="40" y="100" text-anchor="start">SÉJOUR · CUISINE</text><text x="205" y="75" text-anchor="middle">CH. 1</text><text x="262" y="75" text-anchor="middle">CH. 2</text><text x="205" y="112" text-anchor="middle">ENTRÉE</text><text x="262" y="126" text-anchor="middle">SDB</text><path class="ct ds" d="M30 10H290M30 6V19M290 6V19M27 13L33 7M287 13L293 7"/><path class="ct ds" d="M304 22V142M296 22H308M296 142H308M301 25L307 19M301 145L307 139"/><text class="ctt" x="160" y="7" text-anchor="middle">10,40 m</text><text class="ctt" transform="translate(313 82) rotate(90)" text-anchor="middle">6,50 m</text></svg><figcaption>Plan · T3 · 68 m²</figcaption></figure>
 <div class="stack"><h2 class="disp" style="font-size:36px">Rénovation complète d’appartement</h2><p style="color:var(--ink-2)">Du T2 au T5, tout l’intérieur, sans ou avec redistribution des pièces.</p><dl class="facts"><dt>Réalisé par</dt><dd>TOP 7 RENOVATION 59</dd></dl></div>
-<div class="stack"><span class="legend">Ce qui est compris</span><ul class="checks"><li>Démolition et évacuation des gravats</li><li>Électricité complète aux normes</li><li>Plomberie, arrivées et évacuations</li><li>Plâtrerie et isolation des murs</li><li>Cuisine et salle de bain</li><li>Sols, peinture, portes intérieures</li></ul><a class="btn" href="#estimer" style="align-self:flex-start">Estimer ce projet</a></div>
+<div class="stack"><span class="legend">Ce qui est compris</span><ul class="checks"><li>Démolition et évacuation des gravats</li><li>Électricité complète aux normes</li><li>Plomberie, arrivées et évacuations</li><li>Plâtrerie et isolation des murs</li><li>Cuisine et salle de bain</li><li>Sols, peinture, portes intérieures</li></ul><a class="btn" href="#estimer" style="align-self:flex-start">Simuler mes travaux</a></div>
 <div class="impact"><span class="impact-h"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V11M10 20V5M16 20v-6M2.5 20.5h19"/></svg> Ce que ça change, à Lille</span><div class="imps"><div class="imp"><em>La facture</em><b>1 327 € → 756 €</b><span>par an, facture typique d’un appartement de 40 à 70 m² classé E, puis classé C</span></div><div class="imp"><em>La valeur</em><b>+7 %</b><span>écart de prix moyen observé dans le Nord entre un appartement E et le même en C, pas un gain garanti</span></div><div class="imp"><em>Le loyer</em><b>≈ 1 000 €</b><span>par mois pour un T3 de 68 m² (14,61 €/m², charges comprises)</span></div></div><details class="src"><summary><span><b>Source :</b> ADEME, factures des DPE lillois · Estqmo, ventes DVF du Nord · ANIL, loyers 2025</span><span class="src-more">détail</span></summary><p>Factures : montants annuels inscrits dans les DPE lillois (coût estimé des 5 usages), <span class="term" data-def="La valeur du milieu : la moitié des cas est au-dessus, l'autre moitié en dessous.">médiane</span> par classe et par taille, DPE de l’ADEME au 3 août 2026 ; calcul <span class="brand">Chantier Tenu</span>. Valeur : coefficients du moteur d’Estqmo, mesurés le 6 août 2026 sur les ventes du Nord (<span class="term" data-def="Demandes de valeurs foncières : la base publique des ventes immobilières, tenue par l'État.">DVF</span>), à âge et quartier comparables : 12 359 ventes d’appartements et 30 402 ventes de maisons. Écart calculé par rapport au même logement classé D. C’est un écart moyen observé dans le Nord, pas un gain garanti ; repère national des notaires : environ −12 % pour un logement classé F ou G face au même logement classé D. Loyer : Carte des loyers 2025 (ANIL et ministère du Logement) : loyers d’annonce à Lille, charges comprises, bien type au 3e trimestre 2025.</p></details></div>
 </article>
 <article id="travaux-maison" class="card trow" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:20px 40px">
 <figure class="sheet anim" data-lit aria-hidden="true"><svg class="ill" viewBox="0 0 320 160"  aria-hidden="true" focusable="false"><rect class="hatch" x="0" y="118" width="320" height="42"/><polygon class="rm" style="--d:0" points="90,118 230,118 230,152 90,152"/><polygon class="rm" style="--d:170" points="90,80 230,80 230,118 90,118"/><polygon class="rm" style="--d:340" points="90,50 230,50 230,80 90,80"/><polygon class="rm" style="--d:510" points="90,50 90,46.5 160,14 230,46.5 230,50"/><path class="dash" d="M232 66H296V118"/><path class="s ds" d="M0 118H90M230 118H320"/><path class="w ds" d="M90 152V50M230 152V50M90 152H230"/><path class="w2 ds" d="M78 52L160 12L242 52"/><path class="p ds" d="M90 118H100M130 118H230M90 80H190M220 80H230M90 50H230"/><path class="s ds" d="M100 152v-5.67h5.00v-5.67h5.00v-5.67h5.00v-5.67h5.00v-5.67h5.00v-5.67h5.00M190 118v-5.43h4.29v-5.43h4.29v-5.43h4.29v-5.43h4.29v-5.43h4.29v-5.43h4.29v-5.43h4.29"/><rect class="win df" x="87" y="88" width="6" height="22"/><rect class="win df" x="87" y="56" width="6" height="18"/><rect class="win df" x="227" y="88" width="6" height="22"/><rect class="win df" x="227" y="56" width="6" height="18"/><rect class="win df" x="87" y="121" width="6" height="8"/><circle class="win df" cx="160" cy="28" r="5"/><text x="180" y="140" text-anchor="middle">CAVE</text><text x="140" y="104" text-anchor="middle">RDC</text><text x="140" y="70" text-anchor="middle">R+1</text><text x="160" y="45" text-anchor="middle">COMBLES</text><path class="lv" d="M55 145H65L60 152Z"/><text class="ctt" x="52" y="151" text-anchor="end">−2,40</text><path class="lv" d="M55 111H65L60 118Z"/><text class="ctt" x="52" y="117" text-anchor="end">±0,00</text><path class="lv" d="M55 73H65L60 80Z"/><text class="ctt" x="52" y="79" text-anchor="end">+2,70</text><path class="lv" d="M55 43H65L60 50Z"/><text class="ctt" x="52" y="49" text-anchor="end">+4,85</text><path class="ct ds" d="M308 12V118M300 12H312M300 118H312M305 15L311 9M305 121L311 115"/><text class="ctt" transform="translate(316 65) rotate(90)" text-anchor="middle">7,55 m</text></svg><figcaption>Coupe · maison 1930</figcaption></figure>
 <div class="stack"><h2 class="disp" style="font-size:36px">Rénovation de maison</h2><p style="color:var(--ink-2)">Maison 1930, maison de ville, roubaisienne : pièce par pièce, de la cave aux combles.</p><dl class="facts"><dt>Réalisé par</dt><dd>TOP 7 RENOVATION 59</dd></dl></div>
-<div class="stack"><span class="legend">Ce qui est compris</span><ul class="checks"><li>Tout l’intérieur, étage par étage</li><li>Traitement de l’humidité de la cave</li><li>Aménagement des combles, sans toucher à la toiture</li><li>Cuisine, salles de bain, sols, peinture</li></ul><a class="btn" href="#estimer" style="align-self:flex-start">Estimer ce projet</a></div>
+<div class="stack"><span class="legend">Ce qui est compris</span><ul class="checks"><li>Tout l’intérieur, étage par étage</li><li>Traitement de l’humidité de la cave</li><li>Aménagement des combles, sans toucher à la toiture</li><li>Cuisine, salles de bain, sols, peinture</li></ul><a class="btn" href="#estimer" style="align-self:flex-start">Simuler mes travaux</a></div>
 <div class="impact"><span class="impact-h"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V11M10 20V5M16 20v-6M2.5 20.5h19"/></svg> Ce que ça change, à Lille</span><div class="imps"><div class="imp"><em>La facture</em><b>2 344 € → 1 268 €</b><span>par an, facture typique d’une maison de 70 à 130 m² classée E, puis classée C</span></div><div class="imp"><em>La valeur</em><b>−24 %</b><span>écart de prix moyen observé dans le Nord entre une maison G et la même en D ; notaires, France entière : environ −12 % pour F ou G</span></div><div class="imp"><em>Le loyer</em><b>12,74 €/m²</b><span>par mois, charges comprises : le loyer d’annonce d’une maison à Lille</span></div></div><details class="src"><summary><span><b>Source :</b> ADEME, factures des DPE lillois · Estqmo, ventes DVF du Nord · ANIL, loyers 2025</span><span class="src-more">détail</span></summary><p>Factures : montants annuels inscrits dans les DPE lillois (coût estimé des 5 usages), médiane par classe et par taille, DPE de l’ADEME au 3 août 2026 ; calcul <span class="brand">Chantier Tenu</span>. Valeur : coefficients du moteur d’Estqmo, mesurés le 6 août 2026 sur les ventes du Nord (DVF), à âge et quartier comparables : 12 359 ventes d’appartements et 30 402 ventes de maisons. Écart calculé par rapport au même logement classé D. C’est un écart moyen observé dans le Nord, pas un gain garanti ; repère national des notaires : environ −12 % pour un logement classé F ou G face au même logement classé D. Loyer : Carte des loyers 2025 (ANIL et ministère du Logement) : loyers d’annonce à Lille, charges comprises, bien type au 3e trimestre 2025.</p></details></div>
 </article>
 <article id="travaux-plateau" class="card trow" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:20px 40px">
 <figure class="sheet anim" data-lit aria-hidden="true"><svg class="ill" viewBox="0 0 320 160"  aria-hidden="true" focusable="false"><rect class="rm0" x="30" y="22" width="260" height="120"/><rect class="rmn" x="228" y="22" width="62" height="74"/><path class="w ds" d="M30 22H290V142H30Z"/><rect class="win df" x="48" y="19" width="40" height="6"/><path class="s2 df" d="M48 22H88"/><rect class="win df" x="110" y="19" width="38" height="6"/><path class="s2 df" d="M110 22H148"/><rect class="win df" x="176" y="19" width="40" height="6"/><path class="s2 df" d="M176 22H216"/><rect class="win df" x="240" y="19" width="40" height="6"/><path class="s2 df" d="M240 22H280"/><rect class="win df" x="60" y="139" width="40" height="6"/><path class="s2 df" d="M60 142H100"/><rect class="porteur df" x="156" y="22" width="8" height="40"/><rect class="porteur df" x="156" y="102" width="8" height="40"/><rect class="demo df" x="156" y="62" width="8" height="40"/><path class="ipn df" d="M160 54V110"/><path class="demo old df" d="M30 82H156"/><path class="s ds" d="M36 118H96V138H36ZM44 122H60V134H44Z"/><path class="nw ds" d="M228 22V96H240M258 96H290"/><path class="nwd ds" d="M258 96V78A18 18 0 0 0 240 96"/><text class="lbl-o" x="93" y="77" text-anchor="middle">À DÉMOLIR</text><text x="170" y="86" text-anchor="start">IPN</text><text class="lbl-b" x="259" y="54" text-anchor="middle">CH. 3</text><text class="lbl-b" x="259" y="64" text-anchor="middle">À CRÉER</text><text x="93" y="104" text-anchor="middle">CUISINE OUVERTE</text><text x="205" y="124" text-anchor="middle">SÉJOUR</text><text transform="translate(150 140) rotate(-90)">PORTEUR</text><path d="M20 151H32" stroke="#151E24" stroke-width="2.5"/><text x="36" y="154" text-anchor="start">EXISTANT</text><path d="M92 151H104" stroke="#C99A2E" stroke-width="2.5" stroke-dasharray="4 2"/><text x="108" y="154" text-anchor="start">À DÉMOLIR</text><path d="M168 151H180" stroke="#A8462B" stroke-width="2.5"/><text x="184" y="154" text-anchor="start">À CRÉER</text></svg><figcaption>Plan · à démolir, à créer</figcaption></figure>
 <div class="stack"><h2 class="disp" style="font-size:36px">Plateau et redistribution</h2><p style="color:var(--ink-2)">Ouvrir, redistribuer, créer une chambre ou une salle d’eau. Un bureau d’études intervient si un mur porteur est touché.</p><dl class="facts"><dt>Réalisé par</dt><dd>TOP 7 RENOVATION 59</dd></dl></div>
-<div class="stack"><span class="legend">Ce qui est compris</span><ul class="checks"><li>Plans de la nouvelle distribution</li><li>Cloisons, ouvertures, renforts</li><li>Toute la rénovation intérieure</li></ul><a class="btn" href="#estimer" style="align-self:flex-start">Estimer ce projet</a></div>
+<div class="stack"><span class="legend">Ce qui est compris</span><ul class="checks"><li>Plans de la nouvelle distribution</li><li>Cloisons, ouvertures, renforts</li><li>Toute la rénovation intérieure</li></ul><a class="btn" href="#estimer" style="align-self:flex-start">Simuler mes travaux</a></div>
 <div class="impact"><span class="impact-h"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V11M10 20V5M16 20v-6M2.5 20.5h19"/></svg> Ce que ça change, à Lille</span><div class="imps"><div class="imp"><em>Le loyer</em><b>18,09 €/m²</b><span>pour un T1 ou un T2 à Lille, contre 14,61 €/m² pour un T3 et plus</span></div><div class="imp"><em>L’amiante</em><b>74,7 %</b><span>au moins des logements lillois diagnostiqués datent d’avant 1989 : repérage de l’amiante obligatoire avant les travaux</span></div><div class="imp"><em>La copropriété</em><b>4 846</b><span>copropriétés à Lille : toucher un mur porteur ou les parties communes demande l’accord de l’assemblée générale</span></div></div><details class="src"><summary><span><b>Source :</b> ADEME, DPE au 3 août 2026 · ANIL, loyers 2025 · Anah, copropriétés au 6 août 2026</span><span class="src-more">détail</span></summary><p>Loyers : Carte des loyers 2025 (ANIL et ministère du Logement) : loyers d’annonce à Lille, charges comprises, bien type au 3e trimestre 2025. Âge : DPE de l’ADEME, logements existants de Lille (avec Lomme et Hellemmes), le DPE le plus récent de chaque logement, données au 3 août 2026 ; calcul <span class="brand">Chantier Tenu</span>. Copropriétés : registre national des copropriétés (Anah), fichier du 6 août 2026 : 4 846 copropriétés immatriculées à Lille.</p></details></div>
 </article>
 <article id="travaux-colocation" class="card trow" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:20px 40px">
@@ -2711,19 +2749,19 @@ main .page-head+section.block{padding-top:clamp(28px,3.5vw,44px)!important}
 <div class="panel ink"><span class="eyebrow">Le prix tenu</span><h2 class="h-blk" style="color:var(--white)">Le prix du devis est ferme</h2><p style="color:#C9D0D4">Il ne change que dans deux cas, toujours par un <span class="term" data-def="Un document signé qui modifie le devis : il ajoute ou retire des travaux, avec leur prix, avant qu'ils soient faits.">avenant</span> signé avant les travaux : vous demandez plus, ou un imprévu dépasse la provision prévue au devis. L’écart entre le devis et le coût final est publié, chantier par chantier.</p><a data-team class="more" href="#engagements" style="color:var(--white)">Nos engagements</a></div>
 <div class="panel"><span class="eyebrow">TVA</span><h2 class="h-blk">10 % ou 5,5 %, parfois 20 %</h2><p style="color:var(--ink-2)">TVA à 10 % pour les travaux d’amélioration dans un logement de plus de 2 ans, 5,5 % pour les travaux de rénovation énergétique éligibles. Une chaudière au gaz ou au fioul est à 20 % depuis le 1er mars 2025. Si le chantier refait à neuf plus des deux tiers de chacun des six lots du second œuvre (sols non porteurs, fenêtres et portes extérieures, cloisons, plomberie, électricité, chauffage), tout le chantier passe à 20 %. Le devis confirme le taux.</p><a data-team class="more" href="#aides">Aides et règles</a></div>
 </div>
-<div class="btn-row"><a class="btn big" href="#estimer"><span>Chiffrer mon logement<span class="l-long-m"> poste par poste</span></span><span class="bub" aria-hidden="true"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12H19M13 6l6 6-6 6"/></svg></span></a></div>
+<div class="btn-row"><a class="btn big" href="#estimer">Simuler mes travaux<span class="bub" aria-hidden="true"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12H19M13 6l6 6-6 6"/></svg></span></a></div>
 </div></section>
 
 </div>
 
 <!-- ===================== ESTIMER ===================== -->
 <div data-route="estimer" hidden>
-<section class="page-head ph-tool"><div class="wrap ph-grid"><div class="stack"><p class="crumb"><a href="#accueil">Accueil</a> / Simulateur de travaux</p><h1 class="disp h1" style="font-size:clamp(40px,6vw,84px)">Le simulateur de travaux, poste par poste</h1><p class="lead">Neuf étapes, une par corps de métier. À chaque réponse, la fourchette se resserre ; « je ne sais pas » est toujours possible. À la fin, un pré-devis ligne par ligne.</p></div><figure class="ph-ill sheet anim" aria-hidden="true"><svg class="ill" viewBox="0 0 320 160"  aria-hidden="true" focusable="false"><rect class="rm" style="--d:0" x="30" y="22" width="130" height="120"/><rect class="rm" style="--d:140" x="160" y="22" width="65" height="63"/><rect class="rm" style="--d:280" x="225" y="22" width="65" height="63"/><rect class="rm" style="--d:420" x="245" y="85" width="45" height="57"/><rect class="rm" style="--d:560" x="160" y="85" width="85" height="57"/><path class="w ds" d="M30 22H290V142H30Z"/><rect class="win df" x="50" y="19" width="40" height="6"/><path class="s2 df" d="M50 22H90"/><rect class="win df" x="110" y="19" width="35" height="6"/><path class="s2 df" d="M110 22H145"/><rect class="win df" x="178" y="19" width="32" height="6"/><path class="s2 df" d="M178 22H210"/><rect class="win df" x="245" y="19" width="30" height="6"/><path class="s2 df" d="M245 22H275"/><rect class="win df" x="60" y="139" width="45" height="6"/><path class="s2 df" d="M60 142H105"/><rect class="win df" x="27" y="60" width="6" height="40"/><path class="s2 df" d="M30 60V100"/><rect class="gap" x="190" y="139" width="18" height="6"/><path class="p ds" d="M160 22V95M160 125V142M160 85H170M188 85H227M243 85H290M225 22V85M245 85V100M245 116V142"/><path class="s ds" d="M170 85V67A18 18 0 0 1 188 85M243 85V69A16 16 0 0 0 227 85M245 100H261A16 16 0 0 1 245 116M190 142V124A18 18 0 0 1 208 142"/><rect class="s ds" x="40" y="30" width="55" height="16" rx="2"/><path class="s ds" d="M40 34H95M58 34V46M76 34V46"/><circle class="s ds" cx="118" cy="62" r="11"/><circle class="s ds" cx="118" cy="46" r="3"/><circle class="s ds" cx="118" cy="78" r="3"/><circle class="s ds" cx="102" cy="62" r="3"/><circle class="s ds" cx="134" cy="62" r="3"/><rect class="s ds" x="34" y="118" width="70" height="20"/><rect class="s ds" x="42" y="122" width="18" height="12" rx="2"/><circle class="s ds" cx="80" cy="124" r="3"/><circle class="s ds" cx="92" cy="124" r="3"/><circle class="s ds" cx="80" cy="132" r="3"/><circle class="s ds" cx="92" cy="132" r="3"/><rect class="s ds" x="172" y="28" width="40" height="30" rx="1"/><path class="s ds" d="M172 40H212"/><rect class="s ds" x="175" y="31" width="15" height="6" rx="1"/><rect class="s ds" x="194" y="31" width="15" height="6" rx="1"/><rect class="s ds" x="238" y="28" width="40" height="30" rx="1"/><path class="s ds" d="M238 40H278"/><rect class="s ds" x="241" y="31" width="15" height="6" rx="1"/><rect class="s ds" x="260" y="31" width="15" height="6" rx="1"/><rect class="s ds" x="250" y="90" width="36" height="18" rx="2"/><rect class="s ds" x="253" y="93" width="30" height="12" rx="5"/><circle class="s ds" cx="279" cy="132" r="5"/><text x="40" y="100" text-anchor="start">SÉJOUR · CUISINE</text><text x="205" y="75" text-anchor="middle">CH. 1</text><text x="262" y="75" text-anchor="middle">CH. 2</text><text x="205" y="112" text-anchor="middle">ENTRÉE</text><text x="262" y="126" text-anchor="middle">SDB</text><path class="ct ds" d="M30 10H290M30 6V19M290 6V19M27 13L33 7M287 13L293 7"/><path class="ct ds" d="M304 22V142M296 22H308M296 142H308M301 25L307 19M301 145L307 139"/><text class="ctt" id="ill-w" x="160" y="7" text-anchor="middle">10,40 m</text><text class="ctt" id="ill-d" transform="translate(313 82) rotate(90)" text-anchor="middle">6,50 m</text></svg><figcaption>Plan · <span id="ill-s">68</span> m²</figcaption></figure></div></section>
+<section class="page-head ph-tool"><div class="wrap ph-grid"><div class="stack"><p class="crumb"><a href="#accueil">Accueil</a> / Simulateur de travaux</p><h1 class="disp h1" style="font-size:clamp(40px,6vw,84px)">Le simulateur de travaux, poste par poste</h1><p class="lead">Neuf étapes, une par métier, pré-remplies en « Rénover » : confirmez ou changez, le chiffrage suit. À la fin, un pré-devis.</p></div><figure class="ph-ill sheet anim" aria-hidden="true"><svg class="ill" viewBox="0 0 320 160"  aria-hidden="true" focusable="false"><rect class="rm" style="--d:0" x="30" y="22" width="130" height="120"/><rect class="rm" style="--d:140" x="160" y="22" width="65" height="63"/><rect class="rm" style="--d:280" x="225" y="22" width="65" height="63"/><rect class="rm" style="--d:420" x="245" y="85" width="45" height="57"/><rect class="rm" style="--d:560" x="160" y="85" width="85" height="57"/><path class="w ds" d="M30 22H290V142H30Z"/><rect class="win df" x="50" y="19" width="40" height="6"/><path class="s2 df" d="M50 22H90"/><rect class="win df" x="110" y="19" width="35" height="6"/><path class="s2 df" d="M110 22H145"/><rect class="win df" x="178" y="19" width="32" height="6"/><path class="s2 df" d="M178 22H210"/><rect class="win df" x="245" y="19" width="30" height="6"/><path class="s2 df" d="M245 22H275"/><rect class="win df" x="60" y="139" width="45" height="6"/><path class="s2 df" d="M60 142H105"/><rect class="win df" x="27" y="60" width="6" height="40"/><path class="s2 df" d="M30 60V100"/><rect class="gap" x="190" y="139" width="18" height="6"/><path class="p ds" d="M160 22V95M160 125V142M160 85H170M188 85H227M243 85H290M225 22V85M245 85V100M245 116V142"/><path class="s ds" d="M170 85V67A18 18 0 0 1 188 85M243 85V69A16 16 0 0 0 227 85M245 100H261A16 16 0 0 1 245 116M190 142V124A18 18 0 0 1 208 142"/><rect class="s ds" x="40" y="30" width="55" height="16" rx="2"/><path class="s ds" d="M40 34H95M58 34V46M76 34V46"/><circle class="s ds" cx="118" cy="62" r="11"/><circle class="s ds" cx="118" cy="46" r="3"/><circle class="s ds" cx="118" cy="78" r="3"/><circle class="s ds" cx="102" cy="62" r="3"/><circle class="s ds" cx="134" cy="62" r="3"/><rect class="s ds" x="34" y="118" width="70" height="20"/><rect class="s ds" x="42" y="122" width="18" height="12" rx="2"/><circle class="s ds" cx="80" cy="124" r="3"/><circle class="s ds" cx="92" cy="124" r="3"/><circle class="s ds" cx="80" cy="132" r="3"/><circle class="s ds" cx="92" cy="132" r="3"/><rect class="s ds" x="172" y="28" width="40" height="30" rx="1"/><path class="s ds" d="M172 40H212"/><rect class="s ds" x="175" y="31" width="15" height="6" rx="1"/><rect class="s ds" x="194" y="31" width="15" height="6" rx="1"/><rect class="s ds" x="238" y="28" width="40" height="30" rx="1"/><path class="s ds" d="M238 40H278"/><rect class="s ds" x="241" y="31" width="15" height="6" rx="1"/><rect class="s ds" x="260" y="31" width="15" height="6" rx="1"/><rect class="s ds" x="250" y="90" width="36" height="18" rx="2"/><rect class="s ds" x="253" y="93" width="30" height="12" rx="5"/><circle class="s ds" cx="279" cy="132" r="5"/><text x="40" y="100" text-anchor="start">SÉJOUR · CUISINE</text><text x="205" y="75" text-anchor="middle">CH. 1</text><text x="262" y="75" text-anchor="middle">CH. 2</text><text x="205" y="112" text-anchor="middle">ENTRÉE</text><text x="262" y="126" text-anchor="middle">SDB</text><path class="ct ds" d="M30 10H290M30 6V19M290 6V19M27 13L33 7M287 13L293 7"/><path class="ct ds" d="M304 22V142M296 22H308M296 142H308M301 25L307 19M301 145L307 139"/><text class="ctt" id="ill-w" x="160" y="7" text-anchor="middle">10,40 m</text><text class="ctt" id="ill-d" transform="translate(313 82) rotate(90)" text-anchor="middle">6,50 m</text></svg><figcaption>Plan · <span id="ill-s">68</span> m²</figcaption></figure></div></section>
 <section class="block" style="padding-top:28px"><div class="wrap" id="sim10"><div class="s10">
 <div class="s10-main">
 <div class="s10-top s10-lead"><div class="s10-prog"><p class="s10-prog-t"><span><b id="s-prog-n">0</b> <span id="s-prog-w">étape remplie sur 9</span></span><span class="tag-ex">prix d’exemple sur chaque choix</span></p><div class="s10-prog-bar" role="progressbar" aria-label="Cartes remplies" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0"><i></i></div></div>
 <p class="s10-choices" id="s-choices" hidden></p>
-<div role="group" aria-labelledby="s-lv-h"><p class="s10-lab" id="s-lv-h">Pour aller vite : partez d’un niveau<span>Il pré-remplit les 9 étapes ; vous ajustez ensuite chaque corps de métier.</span></p><div class="lv-grid10"><button type="button" class="lv10" data-level="rafraichir" aria-pressed="false"><b>Rafraîchir</b><span>Murs repris et repeints, sols des pièces de vie</span></button><button type="button" class="lv10" data-level="renover" aria-pressed="false"><b>Rénover</b><span>Tout l’intérieur, sans déplacer les cloisons</span></button><button type="button" class="lv10" data-level="restructurer" aria-pressed="false"><b>Restructurer</b><span>La rénovation, plus la redistribution des pièces</span></button></div></div></div>
+<div role="group" aria-labelledby="s-lv-h"><p class="s10-lab" id="s-lv-h">Votre niveau de travaux<span>« Rénover » est choisi au départ, comme sur l’accueil. Il pré-remplit les 9 étapes : changez-le, puis ajustez chaque corps de métier.</span></p><div class="lv-grid10"><button type="button" class="lv10" data-level="rafraichir" aria-pressed="false"><b>Rafraîchir</b><span>Murs repris et repeints, sols des pièces de vie</span></button><button type="button" class="lv10" data-level="renover" aria-pressed="true"><b>Rénover</b><span>Tout l’intérieur, sans déplacer les cloisons</span></button><button type="button" class="lv10" data-level="restructurer" aria-pressed="false"><b>Restructurer</b><span>La rénovation, plus la redistribution des pièces</span></button></div></div></div>
 <ol class="c10s">
 <li class="c10" id="c-logement" data-card="logement"><h2 class="c10-h"><button type="button" class="c10-head" data-open="logement" aria-expanded="false" aria-controls="c-logement-b"><span class="c10-n" aria-hidden="true"><svg class="c10-home" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 11l8-6.5 8 6.5M6.5 9.5V19h11V9.5M10 19v-5h4v5"/></svg><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 12.5l4 4L18 8"/></svg></span><span class="c10-tt"><span class="c10-t">Le logement</span><span class="c10-sum" id="c-logement-s">À préciser</span></span><span class="c10-side"><span class="c10-mod"><span class="m-ok">Modifier</span><span class="m-no">Remplir</span></span></span></button></h2><div class="c10-b" id="c-logement-b" hidden>
 <div class="q10" data-qk="type" role="group" aria-labelledby="q-type-l"><p class="q10-l" id="q-type-l">Votre logement</p><div class="pills10"><button type="button" class="p10" data-q="type" data-v="appart" aria-pressed="false">Appartement</button><button type="button" class="p10" data-q="type" data-v="maison" aria-pressed="false">Maison</button></div><p class="why10"><span class="why10-i" aria-hidden="true">?</span><span><b>Pourquoi on vous demande ça :</b> Une maison a plus de murs donnant dehors et son propre chauffage ; un appartement a ses étages et sa copropriété.</span></p></div>
@@ -3068,8 +3106,8 @@ main .page-head+section.block{padding-top:clamp(28px,3.5vw,44px)!important}
 <section class="block"><div class="wrap stack" style="gap:30px">
 <article class="chart-card "><div class="chart-head"><h2 class="h-blk">Un appartement classé C vaut environ 13 % de plus que le même appartement classé F</h2></div><p class=takeaway>Ce que l’étiquette change au prix de vente, selon les coefficients du moteur d’Estqmo : 12 359 ventes d’appartements et 30 402 ventes de maisons du Nord, écart par rapport au même logement classé D. Un écart moyen observé, pas un gain garanti ; en France, les notaires mesurent environ −12 % pour F ou G face à D.</p><div class="chart anim narrowc" data-chart="vv2" aria-label="Effet de la classe sur la valeur, appartements et maisons"></div><div class="legend-row"><span><i style="background:var(--blue)"></i>Appartements</span><span><i style="background:var(--brick)"></i>Maisons</span></div><details class="src"><summary><span><b>Source :</b> Estqmo, ventes DVF du Nord</span><span class="src-more">détail</span></summary><p>coefficients du moteur d’Estqmo, mesurés le 6 août 2026 sur les ventes du Nord (<span class="term" data-def="Demandes de valeurs foncières : la base publique des ventes immobilières, tenue par l'État.">DVF</span>), à âge et quartier comparables : 12 359 ventes d’appartements et 30 402 ventes de maisons. Écart calculé par rapport au même logement classé D. C’est un écart moyen observé dans le Nord, pas un gain garanti ; repère national des notaires : environ −12 % pour un logement classé F ou G face au même logement classé D.</p></details></article>
 <div class="grid">
-<article class="card"><h2 class="h3">Remise en état avant location</h2><p style="color:var(--ink-2)">Entre deux locataires : électricité, salle d’eau, sols, peinture, pour relouer vite et aux normes de décence.</p><a class="go" href="#estimer">Simuler</a></article>
-<article class="card"><h2 class="h3">Colocation</h2><p style="color:var(--ink-2)">Un grand logement transformé en chambres avec salles d’eau. Budget par chambre, durée, normes.</p><a class="go" href="#estimer">Simuler</a></article>
+<article class="card"><h2 class="h3">Remise en état avant location</h2><p style="color:var(--ink-2)">Entre deux locataires : électricité, salle d’eau, sols, peinture, pour relouer vite et aux normes de décence.</p><a class="go" href="#estimer">Simuler mes travaux</a></article>
+<article class="card"><h2 class="h3">Colocation</h2><p style="color:var(--ink-2)">Un grand logement transformé en chambres avec salles d’eau. Budget par chambre, durée, normes.</p><a class="go" href="#estimer">Simuler mes travaux</a></article>
 <article class="card"><h2 class="h3">Gagner des classes</h2><p style="color:var(--ink-2)">Les travaux qui font passer de G, F ou E à une classe louable, chiffrés avec des prix d’exemple. MaPrimeRénov’ et l’éco-prêt à taux zéro exigent une entreprise <span class="term" data-def="Reconnu garant de l'environnement : le label qu'une entreprise doit avoir pour que ses travaux ouvrent droit à MaPrimeRénov' et à l'éco-prêt à taux zéro.">RGE</span>.</p><a data-team class="go" href="#energie">Ouvrir le simulateur énergie</a></article>
 </div>
 <div class="door-cards" style="margin-top:0">
@@ -3256,7 +3294,7 @@ main .page-head+section.block{padding-top:clamp(28px,3.5vw,44px)!important}
 <p class="small" id="f-ouverture-msg" role="status"></p>
 <div><button class="btn" type="submit">Me prévenir de l’ouverture</button></div>
 </form>
-<div class="btn-row"><a class="more" href="#bailleurs">Les règles pour les bailleurs</a><a class="more" href="#estimer">Estimer des travaux</a></div>
+<div class="btn-row"><a class="more" href="#bailleurs">Les règles pour les bailleurs</a><a class="more" href="#estimer">Simuler mes travaux</a></div>
 </div></section>
 
 </div>
@@ -3366,8 +3404,8 @@ main .page-head+section.block{padding-top:clamp(28px,3.5vw,44px)!important}
 <p>Guillaume Chailloux participe aussi à Estqmo (estimation) et peut être rémunéré sur les chantiers signés.</p></div>
 <nav class="foot-map" aria-label="Plan du site">
 <div><span class="eyebrow">Les travaux</span><a href="#travaux">Les types de travaux</a><a href="#prix">Les prix au m²</a><a data-team href="#realisations">Les réalisations</a><a data-team href="#suivi">Le journal de chantier</a></div>
-<div><span class="eyebrow">Simulateur</span><a href="#estimer">Simulateur de travaux</a><a data-team href="#energie">Simulateur énergie</a><a data-team href="#photo">Ma pièce rénovée</a></div>
-<div><span class="eyebrow">Bailleurs</span><a href="#bailleurs">Bailleurs</a><a data-team href="#investisseurs">Le pack investisseur</a><a data-team href="#aides">Aides et règles</a><a data-team href="#lille">Lille en chiffres</a></div>
+<div><span class="eyebrow">Chiffrer</span><a href="#estimer">Simuler mes travaux</a><a data-team href="#energie">Simulateur énergie</a><a data-team href="#photo">Ma pièce rénovée</a></div>
+<div><span class="eyebrow">Pour les bailleurs</span><a href="#bailleurs">Bailleurs</a><a data-team href="#investisseurs">Le pack investisseur</a><a data-team href="#aides">Aides et règles</a><a data-team href="#lille">Lille en chiffres</a></div>
 <div><span class="eyebrow">Nous connaître</span><a data-team href="#engagements">Nos engagements</a><a href="#entreprise">Qui sommes-nous</a><a href="#transparence">Transparence</a><a href="#transparence-donnees">Vos données</a><a href="#contact">Être rappelé</a><a href="#contact-pro">Proposer votre entreprise</a><a data-team href="#plan">Plan du site</a></div>
 </nav>
 <div class="foot-band"><a href="https://france-renov.gouv.fr/servicepublic" target="_blank" rel="noopener">France Rénov’ : avant de vous engager, le service public vous informe gratuitement pour préparer et sécuriser votre projet. <span class="nobr">www.france-renov.gouv.fr</span></a><span>Site ami : <a class="ext" href="#" data-soon title="Adresse d’Estqmo à venir">Estqmo, l’estimation avec Guillaume</a></span><a class="team-link" href="#equipe" id="equipe" role="button" aria-pressed="false" data-team>Mode équipe</a></div>
@@ -3733,13 +3771,14 @@ if (typeof module !== "undefined" && module.exports) module.exports = DIAG;
   function closeDrops(except) {
     grps.forEach(function (g) { if (g !== except) { g.classList.remove("open"); $(".nav-btn", g).setAttribute("aria-expanded", "false"); } });
   }
-  function closeMenu() { nav.classList.remove("open"); nav.style.maxHeight = ""; burger.setAttribute("aria-expanded", "false"); burger.setAttribute("aria-label", "Ouvrir le menu"); document.body.classList.remove("menu-open"); closeDrops(); }
+  function closeMenu() { nav.classList.remove("open"); nav.style.maxHeight = ""; nav.style.minHeight = ""; burger.setAttribute("aria-expanded", "false"); burger.setAttribute("aria-label", "Ouvrir le menu"); document.body.classList.remove("menu-open"); closeDrops(); }
   /* au téléphone, le menu tient entre l'en-tête et le bas de l'écran ; la barre du bas s'efface (audit P-03) */
   function openMenu() {
     var hr = head.getBoundingClientRect();
     if (hr.top > 0.5) window.scrollTo(0, window.scrollY + hr.top);
     var top = head.getBoundingClientRect().bottom;
     nav.style.maxHeight = Math.max(160, Math.floor(window.innerHeight - top)) + "px";
+    nav.style.minHeight = mobileNav() ? nav.style.maxHeight : "";
     nav.classList.add("open");
     burger.setAttribute("aria-expanded", "true");
     burger.setAttribute("aria-label", "Fermer le menu");
@@ -3857,9 +3896,9 @@ if (typeof module !== "undefined" && module.exports) module.exports = DIAG;
       mb.v.textContent = mbVals[r];
       mb.call.setAttribute("href", r === "estimer" ? "#estimer-rappel" : "#energie-rappel");
     } else {
-      mb.sum.hidden = true; mb.est.hidden = r === "accueil"; mb.call.hidden = r === "contact"; mb.call.setAttribute("href", "#contact"); mb.sum.parentNode.classList.remove("has-sum");
+      mb.sum.hidden = true; mb.est.hidden = false; mb.call.hidden = false; mb.call.setAttribute("href", "#contact"); mb.sum.parentNode.classList.remove("has-sum");
     }
-    mb.sum.parentNode.classList.toggle("solo", r === "accueil" || r === "contact");
+    mb.sum.parentNode.classList.remove("solo");
     if (r === "estimer" || r === "energie") mb.call.hidden = false;
   }
   function mbSet(r, v) {
@@ -4084,6 +4123,9 @@ if (typeof module !== "undefined" && module.exports) module.exports = DIAG;
   function applyDefaults() {}
   function r100(x) { return Math.round(x / 100) * 100; }
   function r50(x) { return Math.round(x / 50) * 50; }
+  /* passe 2, point 8 : un seul prix au m², arrondi à 10 €, sur l'accueil et la page Prix */
+  function r10(x) { return Math.round(x / 10) * 10; }
+  function m2Txt(t, S) { return nf(r10(t.lo / S)) + " à " + nf(r10(t.hi / S)) + NBS + "€"; }
   function cap(t) { return t ? t.charAt(0).toUpperCase() + t.slice(1) : t; }
   var GR = {};
   D.grille.lignes.forEach(function (r) { GR[r.code] = r; });
@@ -4219,14 +4261,14 @@ if (typeof module !== "undefined" && module.exports) module.exports = DIAG;
   }
   function renderPrix() {
     var S = 68, ren = levelTotal("renover", S);
-    if ($("#h-m2")) $("#h-m2").textContent = nf(r50(ren.lo / S)) + " à " + nf(r50(ren.hi / S)) + NBS + "€";
+    if ($("#h-m2")) $("#h-m2").textContent = m2Txt(ren, S);
     var LV = [["rafraichir", "Rafraîchir", "Murs repris par endroits et repeints, plafonds compris ; stratifié dans les pièces de vie, avec la dépose de l’ancien sol"],
       ["renover", "Rénover", "Tout l’intérieur sans déplacer les cloisons : murs ratissés et repeints, parquet contrecollé et carrelage dans les pièces humides, électricité et plomberie refaites, chauffe-eau, une cuisine complète de milieu de gamme, une salle de bain, un WC et les portes"],
       ["restructurer", "Restructurer", "La rénovation, plus la redistribution des pièces : cloisons déplacées et cuisine ouverte sur le séjour"]];
     var tb = $("#prix-niveaux");
     if (tb) tb.innerHTML = LV.map(function (x) {
       var t = levelTotal(x[0], S);
-      return '<tr><td data-label="Niveau"><strong>' + x[1] + '</strong></td><td data-label="Ce qui est compris">' + x[2] + '</td><td class="r" data-label="Le m²">' + nf(Math.round(t.lo / S)) + " à " + nf(Math.round(t.hi / S)) + NBS + '€</td><td class="r" data-label="T3 de 68 m²">' + nf(r100(t.lo)) + " à " + e100(t.hi) + "</td></tr>";
+      return '<tr><td data-label="Niveau"><strong>' + x[1] + '</strong></td><td data-label="Ce qui est compris">' + x[2] + '</td><td class="r" data-label="Le m²">' + m2Txt(t, S) + '</td><td class="r" data-label="T3 de 68 m²">' + nf(r100(t.lo)) + " à " + e100(t.hi) + "</td></tr>";
     }).join("");
     var box = $("#prix-postes");
     if (box) {
@@ -4239,14 +4281,47 @@ if (typeof module !== "undefined" && module.exports) module.exports = DIAG;
       }).join("");
     }
     var dr = donutRows(), tot = dr.reduce(function (a, p) { return a + p.v; }, 0), top = dr.slice().sort(function (a, b) { return b.v - a.v; }).slice(0, 3);
+    balancePrix();
     if ($("#donut-take")) $("#donut-take").innerHTML = "Sur <b>" + e100(tot) + "</b> au milieu de la fourchette, les trois corps de métier les plus lourds : " + top.map(function (p) { return esc(p.l.toLowerCase()); }).join(" · ") + ".";
   }
+  /* passe 2, point 3 : à partir de 1 101 px, deux colonnes de même hauteur. Chaque corps de métier va dans la colonne qui
+     rend les deux hauteurs les plus proches (toutes les répartitions sont essayées, l'ordre est gardé dans chaque colonne). */
+  function balancePrix() {
+    var box = $("#prix-postes");
+    if (!box) return;
+    var arts = $$(".pc9", box);
+    arts.forEach(function (a) { box.appendChild(a); });
+    $$(".pc-col", box).forEach(function (c) { c.parentNode.removeChild(c); });
+    box.classList.remove("cols2");
+    if (window.innerWidth < 1101 || !box.getClientRects().length || arts.length > 14) return;
+    box.classList.add("cols2");
+    var L = document.createElement("div"), Rc = document.createElement("div");
+    L.className = Rc.className = "pc-col";
+    box.appendChild(L); box.appendChild(Rc);
+    arts.forEach(function (a) { L.appendChild(a); });
+    var h = arts.map(function (a) { return a.getBoundingClientRect().height + 16; }), tot = h.reduce(function (x, y) { return x + y; }, 0), best = 1, bd = Infinity;
+    for (var m = 1; m < 1 << arts.length; m += 2) {
+      var sm = 0;
+      for (var i = 0; i < arts.length; i++) if (m >> i & 1) sm += h[i];
+      if (Math.abs(tot - 2 * sm) < bd) { bd = Math.abs(tot - 2 * sm); best = m; }
+    }
+    arts.forEach(function (a, i) { (best >> i & 1 ? L : Rc).appendChild(a); });
+  }
+  var balT = null;
+  function balanceSoon() { clearTimeout(balT); balT = setTimeout(balancePrix, 80); }
+  window.addEventListener("resize", balanceSoon);
+  window.addEventListener("hashchange", balanceSoon);
+  window.addEventListener("load", balanceSoon);
   function renderHome() {
     var s = surfVal(state.surfRaw);
     if (s === null || !$("#h-live")) return;
     var t = levelTotal("renover", s, mapType(state.type));
     $("#h-live").innerHTML = fmtRange(t.lo, t.hi);
   }
+  /* passe 2, point 1 : sur l'accueil, la barre du bas attend que le bouton « Simuler mes travaux » de la carte sorte de l'écran
+     (même contenu que sur les autres pages, sans doubler le bouton visible) */
+  var tGo = $("#t-go");
+  if (tGo && "IntersectionObserver" in window) new IntersectionObserver(function (es) { document.documentElement.classList.toggle("cta-vu", es[0].isIntersecting); }).observe(tGo);
   /* v9 : les avis Google de la fiche de l'entreprise ; le bloc devient public à partir de D.avis.seuil avis */
   /* v9 : la vitrine, les chantiers réalisés par l'entreprise partenaire principale (D.vitrine) */
   var VT_TYPES = { appart: "Appartement", maison: "Maison", coloc: "Colocation" };
@@ -4290,8 +4365,10 @@ if (typeof module !== "undefined" && module.exports) module.exports = DIAG;
     if (A.lien) { l.href = A.lien; l.hidden = false; } else l.hidden = true;
   }
   /* ---------- le parcours ---------- */
-  var A = blankA(), SIMV = $("#sim10");
-  var simPrev = null, simPrecPrev = null, cardsDone = {}, openCard = "logement", simLevel = null;
+  /* passe 2, point 2 : au départ, le niveau « Rénover » et le logement d'exemple de l'accueil sont choisis (modifiables) :
+     le premier chiffre est celui de l'accueil. */
+  var A = presetA("renover", 68), SIMV = $("#sim10");
+  var simPrev = null, simPrecPrev = null, cardsDone = {}, seen = {}, openCard = "logement", simLevel = "renover", simTouched = false;
   function cond(s) { var v = String(A[s.k]); return s.in ? s.in.indexOf(v) >= 0 : s.not_in.indexOf(v) < 0; }
   function visible(q) { return !q.show || (q.show.any ? q.show.any.some(cond) : cond(q.show)); }
   function optOf(q, v) { for (var i = 0; i < q.opts.length; i++) if (q.opts[i][0] === v) return q.opts[i]; return null; }
@@ -4367,13 +4444,13 @@ if (typeof module !== "undefined" && module.exports) module.exports = DIAG;
     $("#q-sol-how").textContent = "Pièces humides : cuisine " + SQ.solCuisine.complete + NBS + "m² (kitchenette " + SQ.solCuisine.kitchenette + NBS + "m²), " + SQ.solSdb + NBS + "m² par salle de bain, " + String(SQ.solWc).replace(".", ",") + NBS + "m² de WC séparé. Pièces de vie : le reste de la surface.";
     D.sim.cards.forEach(function (c, i) {
       var el = $("#c-" + c.id), st = cardState(c), was = cardsDone[c.id];
-      if (st.done && c.lot) nDone++;
+      if (st.done && seen[c.id] && c.lot) nDone++;
       el.classList.toggle("is-done", st.done);
       el.classList.toggle("has-nsp", st.done && st.nsp);
       if (st.done && was === false) { el.classList.remove("just-done"); void el.offsetWidth; el.classList.add("just-done"); }
       cardsDone[c.id] = st.done;
       var sum = st.n || c.id === "logement" ? cardSummary(c, cx) : "";
-      $("#c-" + c.id + "-s").textContent = st.done ? sum : (st.n ? sum + " · à compléter" : "À préciser");
+      $("#c-" + c.id + "-s").textContent = st.done ? (seen[c.id] || !c.lot ? sum : sum + " · proposé, à confirmer") : (st.n ? sum + " · à compléter" : "À préciser");
       var amt = $("#c-" + c.id + "-a");
       if (amt) amt.textContent = lotTxt(R, c, st);
       var nx = $("#c-" + c.id + " .c10-next");
@@ -4384,9 +4461,9 @@ if (typeof module !== "undefined" && module.exports) module.exports = DIAG;
       $("#c-" + c.id + " .c10-head").setAttribute("aria-expanded", open ? "true" : "false");
     });
     $("#s-prog-n").textContent = nDone;
-    $("#s-prog-w").textContent = (nDone > 1 ? "étapes remplies" : "étape remplie") + " sur " + STEPS;
+    $("#s-prog-w").textContent = (nDone > 1 ? "étapes confirmées" : "étape confirmée") + " sur " + STEPS;
     $(".s10-prog-bar i").style.width = (100 * nDone / STEPS).toFixed(1) + "%";
-    $(".s10-top").classList.toggle("s10-lead", !simLevel && nDone === 0);
+    $(".s10-top").classList.toggle("s10-lead", !simTouched);
     $(".s10-prog-bar").setAttribute("aria-valuenow", nDone);
     $$("[data-level]", SIMV).forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-level") === simLevel ? "true" : "false"); });
     /* ajouter à mon projet */
@@ -4449,13 +4526,13 @@ if (typeof module !== "undefined" && module.exports) module.exports = DIAG;
     $("#s-ax").innerHTML = ax;
     animTotal(lo, hi);
     var prec = lo + hi > 0 ? 100 * (hi - lo) / (hi + lo) : 0, word = prec < 15 ? "serrée" : (prec < 30 ? "moyenne" : "large");
-    $("#s-prec").innerHTML = "Fourchette <b>" + word + "</b> : " + fmt(hi - lo) + " d’écart. " + (prec < 15 ? "Le devis, après la visite, donnera le prix ferme." : "Elle se resserre à chaque réponse.");
+    $("#s-prec").innerHTML = "Fourchette <b>" + word + "</b> : " + fmt(hi - lo) + " d’écart. " + (prec < 15 || !R.postes.some(function (p) { return !p.lines; }) ? "Le devis, après la visite, donnera le prix ferme." : "Elle se resserre à chaque réponse.");
     $("#s-count").textContent = nDone + " étape" + (nDone > 1 ? "s" : "") + " sur " + STEPS;
     $("#s-bar-n").textContent = nDone + "/" + STEPS + " étapes";
     $("#s-cap").textContent = (A.type === "maison" ? "Maison" : "Appartement") + " · T" + R.c.P + " · " + R.c.S + NBS + "m² · " + state.ville;
     $("#s-list").innerHTML = D.sim.cards.map(function (c) {
       var st = cardState(c), t = c.lot ? lotSum(R, c.lot) : null;
-      var stt = st.done ? (st.nsp ? "à voir à la visite" : "précisé") : "à préciser";
+      var stt = st.done ? (st.nsp ? "à voir à la visite" : (seen[c.id] || !c.lot ? "précisé" : "proposé, à confirmer")) : "à préciser";
       var val = c.lot ? lotTxt(R, c, st) : "T" + R.c.P + " · " + R.c.S + NBS + "m²";
       return '<li><button type="button" class="s10-li' + (st.done ? " ok" : "") + (st.done && st.nsp ? " nsp" : "") + '" data-goto="' + c.id + '"><span class="s10-li-i" aria-hidden="true">' + (st.done ? '<svg viewBox="0 0 24 24"><path d="M6 12.5l4 4L18 8"/></svg>' : "?") +
         '</span><span class="s10-li-t">' + esc(c.t) + '<small>' + stt + '</small></span><span class="s10-li-v' + (st.done || !c.lot ? "" : " wait") + '">' + val + "</span></button></li>";
@@ -4545,6 +4622,8 @@ if (typeof module !== "undefined" && module.exports) module.exports = DIAG;
     SIMV.addEventListener("click", function (e) {
       var b = e.target.closest("button");
       if (!b || !SIMV.contains(b)) return;
+      simTouched = true;
+      D.sim.cards.forEach(function (c) { var ce = $("#c-" + c.id); if (ce && ce.contains(b) && !b.hasAttribute("data-open") && !b.closest(".c10-head")) seen[c.id] = true; });
       var k = b.getAttribute("data-q"), t = b.getAttribute("data-t"), lv = b.getAttribute("data-level");
       if (k) {
         var v = b.getAttribute("data-v");
@@ -4606,7 +4685,7 @@ if (typeof module !== "undefined" && module.exports) module.exports = DIAG;
     var es = $("#e-surface");
     if (!es) return;
     var raw = es.value, s = surfVal(raw);
-    if (!fromSync) { estTouched = true; state.surfRaw = raw; if ($("#t-surface")) { $("#t-surface").value = raw; teaserSummary(); } }
+    if (!fromSync) { estTouched = true; simTouched = true; state.surfRaw = raw; if ($("#t-surface")) { $("#t-surface").value = raw; teaserSummary(); } }
     else A.type = mapType(state.type);
     if (s === null) {
       showErr("e-surface", surfMsg(raw), !fromInput);
